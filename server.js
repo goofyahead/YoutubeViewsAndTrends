@@ -4,8 +4,8 @@ var http = require('http');
 var https = require('https');
 var fs = require('fs');
 
-var HTTP_PORT= 8080;
-var HTTPS_PORT = 443;
+
+var port = process.env.PORT || 5000;
 var LAPSE = 600000;
 
 var API_KEY = "AIzaSyDiNhFxatn5SN25Mb1CqAN0lhkHw9do5l4"
@@ -32,7 +32,7 @@ app.configure(function(){
 	app.use(express.static(__dirname + '/data'));
 });
 
-app.listen(HTTP_PORT);
+app.listen(port);
 console.log('Listening on port 8080...');
 
 app.get('/', function(req, res) {
