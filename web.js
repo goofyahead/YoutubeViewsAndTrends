@@ -1,12 +1,15 @@
 
-define (['fs','underscore','text!templates/plain.html','jquery',], function (fs, _, template, $){
+define (['fs','underscore','text!templates/plain.html','jquery','module', 'path'], function (fs, _, template, $, module, path){
 	var Web = function Web(){
 
 		this.draw = function (req,res, file){
 			var elements = [];
 			var file = req.params.file;
-			fs.readFile('data/'+ file , 'utf8', function (err, data) {
-			  if (err) throw err;
+			fs.readFile( path.dirname(module.uri) + '/data/'+ file , 'utf8', function (err, data) {
+			  if (err) {
+			  	console.log(err);
+			  	throw err;
+			  }
 			  var arraySplited = data.split('//');
 			  
 			  for (elem in arraySplited) {
