@@ -7,20 +7,21 @@ define(['express','http','fs','module', 'path', 'web'], function (express, http,
 	var API_KEY = "AIzaSyDiNhFxatn5SN25Mb1CqAN0lhkHw9do5l4"
 
 	var videosArray = [
-	{name: 'ChessLive', id: '6SRwJVXxMzU'},
-	{name: 'CompanyHorse', id: '_iaP-f65iuE'},
-	{name: 'Dafply', id: '5HFbLfVLNxg'},
-	{name: 'EasyPark', id: 'DHtxQWAG_iI'},
-	{name: 'GigWorking', id: 'TzTphy93KHQ'},
-	{name: 'Hemav', id: 'J5GlNX4E3Kc'},
-	{name: 'Newin', id: 'tQb0s154ZYQ'},
-	{name: 'Noctambuls', id: 'ArJXK8ZySxo'},
-	{name: 'Onfan', id: 'i9upp1EKJuk'},
-	{name: 'Phobius', id: 'k8N0dwa4kS4'},
-	{name: 'Qmunify', id: 'oDA-SkumLfQ'},
 	{name: 'ZeedProtection', id: 'H4cVEQAw7QE'},
+	{name: 'ChessLive', id: '6SRwJVXxMzU'},
+	{name: 'EasyPark', id: 'DHtxQWAG_iI'},
 	{name: 'ManagEat', id: 'tHmSK8-ykjY' },
-	{name: 'Exivit', id: 'pKqvoIfLRPo'}
+	{name: 'Dafply', id: '5HFbLfVLNxg'},
+	{name: 'Newin', id: 'tQb0s154ZYQ'},
+	{name: 'Exivit', id: 'pKqvoIfLRPo'},
+	{name: 'Phobius', id: 'k8N0dwa4kS4'},
+	{name: 'Noctambuls', id: 'ArJXK8ZySxo'},
+	{name: 'Hemav', id: 'J5GlNX4E3Kc'},
+	{name: 'Onfan', id: 'i9upp1EKJuk'},
+	{name: 'GigWorking', id: 'TzTphy93KHQ'},
+	{name: 'CompanyHorse', id: '_iaP-f65iuE'},	
+	{name: 'Onfan', id: 'i9upp1EKJuk'},
+	{name: 'Qmunify', id: 'oDA-SkumLfQ'}	
 	];
 
 	app.configure(function(){
@@ -32,12 +33,12 @@ define(['express','http','fs','module', 'path', 'web'], function (express, http,
 
 	app.get('/', function(req, res) {
 		res.writeHead(200, {"Content-Type": "text/html"});
-		res.write("Datos recopilados");
-		res.write('<ul>');
+		res.write("Datos recopilados ordenados de mayor a manor vistas: ");
+		res.write('<ol>');
 		videosArray.forEach(function (element) {
 			res.write('<li>' + element.name + '<a href=graphs/' + element.name + '.txt> Grafica </a> || <a href=' + element.name + '.txt> Datos </a> </li>');
 		});
-		res.write('</ul>');
+		res.write('</ol>');
 		res.end();
 	});
 
