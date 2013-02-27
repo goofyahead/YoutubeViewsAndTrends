@@ -5,10 +5,17 @@
 	"private": "true",
 	"dependencies": {
 		"express": "3.X",
-		"mongodb": "1.X"
+		"mongodb": "1.X",
+		"underscore" : "1.4.X",
+		"requirejs": ">=1.0.0",
+		"jquery" : "1.8.X"
 	},
 	"engines": {
 		"node": "0.8.x",
 		"npm": "1.1.x"
+	},
+	"subdomain": "goofyahead.TrendNode",
+	"scripts": {
+		"start": "server.js"
 	}
 }

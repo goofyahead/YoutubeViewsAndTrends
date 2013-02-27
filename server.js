@@ -1,16 +1,12 @@
-var express = require('express');
-var app = express();
-var http = require('http');
-var https = require('https');
-var fs = require('fs');
 
+define(['express','http','fs','module', 'path', 'web'], function (express, http, fs, module, path, Web) {
+	var app = express();
 
-var port = process.env.PORT || 5000;
-var LAPSE = 600000;
+	var LAPSE = 600000;
 
-var API_KEY = "AIzaSyDiNhFxatn5SN25Mb1CqAN0lhkHw9do5l4"
+	var API_KEY = "AIzaSyDiNhFxatn5SN25Mb1CqAN0lhkHw9do5l4"
 
-var videosArray = [
+	var videosArray = [
 	{name: 'ChessLive', id: '6SRwJVXxMzU'},
 	{name: 'CompanyHorse', id: '_iaP-f65iuE'},
 	{name: 'Dafply', id: '5HFbLfVLNxg'},
@@ -25,49 +21,56 @@ var videosArray = [
 	{name: 'ZeedProtection', id: 'H4cVEQAw7QE'},
 	{name: 'ManagEat', id: 'tHmSK8-ykjY' },
 	{name: 'Exivit', id: 'pKqvoIfLRPo'}
-];
+	];
 
-app.configure(function(){
-	app.use(express.bodyParser());
-	app.use(express.static(__dirname + '/data'));
-});
+	app.configure(function(){
+		app.use(express.bodyParser());
+		app.use(express.static(path.dirname(module.uri) + '/data'));
+	});
 
-app.listen(port);
-console.log('Listening on port 8080...');
+	console.log('uri is: ' +  path.dirname(module.uri));
 
-app.get('/', function(req, res) {
-	res.writeHead(200, {"Content-Type": "text/html"});
-  	res.write("Datos recopilados");
-  	res.write('<ul>');
-  	videosArray.forEach(function (element) {
-  		res.write('<li><a href=' + element.name + '.txt>' + element.name + '</a></li>');
-  	});
-  	res.write('</ul>');
-  	res.end();
-});
-
-setInterval(function() { 	
-	videosArray.forEach(function (element) {
-		
-		https.get("https://www.googleapis.com/youtube/v3/videos?id="+ element.id +"&key="+ API_KEY +"&part=statistics", 
-		function(res) {
-		  res.on("data", function(chunk) {
-		  	console.log("VideoName: " + element.name);
-		  	var item = JSON.parse(chunk);
-		  	var viewCount =  item.items[0].statistics.viewCount;
-		    console.log("ViewCount: " + viewCount);
-		    var likeCount = item.items[0].statistics.likeCount;
-		    console.log("likeCount: " + likeCount);
-		    var timeStamp = new Date().getTime()
-		    console.log("TimeStamp: " + timeStamp);
-
-		    fs.appendFile('data/' + element.name + '.txt', timeStamp + ':' + viewCount + ':' + likeCount + '//', function (err) {
-			  if (err) throw err;
-			  console.log('The "data to append" was appended to file!');
-			});
-		  });
-		}).on('error', function(e) {
-		  console.log("Got error: " + e.message);
+	app.get('/', function(req, res) {
+		res.writeHead(200, {"Content-Type": "text/html"});
+		res.write("Datos recopilados");
+		res.write('<ul>');
+		videosArray.forEach(function (element) {
+			res.write('<li>' + element.name + '<a href=graphs/' + element.name + '.txt> Grafica </a> || <a href=' + element.name + '.txt> Datos </a> </li>');
 		});
-	});	
+		res.write('</ul>');
+		res.end();
+	});
+
+var webi = new Web();
+
+app.get('/graphs/:file', webi.draw);
+
+setInterval(function() {
+	videosArray.forEach(function (element) {		
+		https.get("https://www.googleapis.com/youtube/v3/videos?id="+ element.id +"&key="+ API_KEY +"&part=statistics", 
+			function(res) {
+				res.on("data", function(chunk) {
+					console.log("VideoName: " + element.name);
+					var item = JSON.parse(chunk);
+					var viewCount =  item.items[0].statistics.viewCount;
+					console.log("ViewCount: " + viewCount);
+					var likeCount = item.items[0].statistics.likeCount;
+					console.log("likeCount: " + likeCount);
+					var timeStamp = new Date().getTime()
+					console.log("TimeStamp: " + timeStamp);
+
+					fs.appendFile('data/' + element.name + '.txt', timeStamp + ':' + viewCount + ':' + likeCount + '//', function (err) {
+						if (err) throw err;
+						console.log('The "data to append" was appended to file!');
+					});
+				});
+			}).on('error', function(e) {
+				console.log("Got error: " + e.message);
+			});
+		});	
 }, LAPSE);
+
+return app;
+});
+
+
