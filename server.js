@@ -1,5 +1,5 @@
 
-define(['express','http','fs','module', 'path', 'web'], function (express, http, fs, module, path, Web) {
+define(['express','http','fs','module', 'path', 'web','https'], function (express, http, fs, module, path, Web, https) {
 	var app = express();
 
 	var LAPSE = 600000;
@@ -26,7 +26,7 @@ define(['express','http','fs','module', 'path', 'web'], function (express, http,
 
 	app.configure(function(){
 		app.use(express.bodyParser());
-		app.use(express.static('/data'));
+		app.use(express.static(path.dirname(module.uri) + '/data'));
 	});
 
 	console.log('uri is: ' +  path.dirname(module.uri));
