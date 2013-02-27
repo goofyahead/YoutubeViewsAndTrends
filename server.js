@@ -26,7 +26,7 @@ define(['express','http','fs','module', 'path', 'web'], function (express, http,
 
 	app.configure(function(){
 		app.use(express.bodyParser());
-		app.use(express.static(path.dirname(module.uri) + '/data'));
+		app.use(express.static('/data'));
 	});
 
 	console.log('uri is: ' +  path.dirname(module.uri));
