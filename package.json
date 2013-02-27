@@ -16,6 +16,6 @@
 	},
 	"subdomain": "goofyahead.TrendNode",
 	"scripts": {
-		"start": "server.js"
+		"start": "app.js"
 	}
 }
