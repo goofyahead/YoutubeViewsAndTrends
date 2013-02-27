@@ -5,7 +5,7 @@ define (['fs','underscore','text!templates/plain.html','jquery','module', 'path'
 		this.draw = function (req,res, file){
 			var elements = [];
 			var file = req.params.file;
-			fs.readFile( path.dirname(module.uri) + '/data/'+ file , 'utf8', function (err, data) {
+			fs.readFile( path.dirname(module.uri) + '/../data/'+ file , 'utf8', function (err, data) {
 			  if (err) {
 			  	console.log(err);
 			  	throw err;
