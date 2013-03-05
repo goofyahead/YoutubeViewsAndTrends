@@ -7,22 +7,34 @@ define(['express','http','fs','module', 'path', 'web','https'], function (expres
 	var API_KEY = "AIzaSyDiNhFxatn5SN25Mb1CqAN0lhkHw9do5l4"
 
 	var videosArray = [
-	{name: 'ZeedProtection', id: 'H4cVEQAw7QE'},
-	{name: 'ChessLive', id: '6SRwJVXxMzU'},
-	{name: 'EasyPark', id: 'DHtxQWAG_iI'},
-	{name: 'ManagEat', id: 'tHmSK8-ykjY' },
-	{name: 'Dafply', id: '5HFbLfVLNxg'},
-	{name: 'Newin', id: 'tQb0s154ZYQ'},
-	{name: 'Exivit', id: 'pKqvoIfLRPo'},
-	{name: 'Phobius', id: 'k8N0dwa4kS4'},
-	{name: 'Noctambuls', id: 'ArJXK8ZySxo'},
-	{name: 'Hemav', id: 'J5GlNX4E3Kc'},
-	{name: 'Onfan', id: 'i9upp1EKJuk'},
-	{name: 'GigWorking', id: 'TzTphy93KHQ'},
-	{name: 'CompanyHorse', id: '_iaP-f65iuE'},	
-	{name: 'Onfan', id: 'i9upp1EKJuk'},
-	{name: 'Qmunify', id: 'oDA-SkumLfQ'}	
+	{name: 'Wallet', id: 'NeWNJKeoZTY'},
+	{name: 'EnTuMano', id: 'dizMqU9lg8o'},
+	{name: 'EsAccesible', id: 'sYm9HQqzcME'},
+	{name: 'MyFarAwayFriend', id: '_RzYM7VsNfo'},
+	{name: 'Bebe-Bubu', id: 'TwEiVlC18sA'},
+	{name: 'UrbanRooster', id: 'Xu5xBMBe1ls'},
+	{name: 'Wanaquest ', id: 'bzytUjPYg0I'},
+	{name: 'BeLocal', id: '9zkx4I_tpBs'},
+	{name: 'WAU', id: 'FLfcPgKBzdY'}
 	];
+
+	// var videosArray = [
+	// {name: 'ZeedProtection', id: 'H4cVEQAw7QE'},
+	// {name: 'ChessLive', id: '6SRwJVXxMzU'},
+	// {name: 'EasyPark', id: 'DHtxQWAG_iI'},
+	// {name: 'ManagEat', id: 'tHmSK8-ykjY'},
+	// {name: 'Dafply', id: '5HFbLfVLNxg'},
+	// {name: 'Newin', id: 'tQb0s154ZYQ'},
+	// {name: 'Exivit', id: 'pKqvoIfLRPo'},
+	// {name: 'Phobius', id: 'k8N0dwa4kS4'},
+	// {name: 'Noctambuls', id: 'ArJXK8ZySxo'},
+	// {name: 'Hemav', id: 'J5GlNX4E3Kc'},
+	// {name: 'Onfan', id: 'i9upp1EKJuk'},
+	// {name: 'GigWorking', id: 'TzTphy93KHQ'},
+	// {name: 'CompanyHorse', id: '_iaP-f65iuE'},	
+	// {name: 'Onfan', id: 'i9upp1EKJuk'},
+	// {name: 'Qmunify', id: 'oDA-SkumLfQ'}	
+	// ];
 
 	app.configure(function(){
 		app.use(express.bodyParser());
